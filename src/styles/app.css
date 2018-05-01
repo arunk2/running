@@ -1,10 +1,8 @@
 .homeContainer{
   height: 100%;
   width: 100%;
-  display: grid;
-  grid-template-columns: 300px auto;
-  grid-template-rows: 60px auto;
   background: #F5F5FB;
+  padding: 100px 60px;
 }
 
 .logo{
@@ -12,13 +10,27 @@
   background: white;
   font-size: 28px;
   line-height: 28px;
-  color: #FF3300;
+  color: #357600;
+  position: fixed;
+  width: 100%;
+  box-shadow: 0px 8px 24px rgba(13,13,18,0.04);
 }
 
 .logo img{
   height: 30px;
 }
-
+.addButton button{
+  width: 200px;
+  color: #FFF;
+  background: #357600;
+  align-self: center;
+  justify-self: center;
+  outline: none;
+}
+.addButton {
+  display: grid;
+  grid-template-columns: auto 300px auto;
+}
 .header{
   background: rgb(var(--white));
   padding: 10px 30px;
@@ -156,7 +168,6 @@
 }
 
 .mainContent{
-  grid-column-start: 2;
   padding-bottom: unset;
   overflow: hidden;
 }
@@ -277,7 +288,6 @@
 .mainContent{
   background-color: #ffffff;
   box-shadow: 0px 8px 24px rgba(13,13,18,0.04);
-  margin: 60px;;
 }
 .mainContent .header {
   height: 50px;
@@ -337,4 +347,12 @@ table th{
 
 table tr:hover{
   background: rgba(245,245,245,0.3);
+}
+
+.bannerImage{
+  background-image: url("./images/baner.jpg");
+  background-repeat: no-repeat;
+  height: 320px;
+  background-position: center;
+  margin-bottom: 40px;
 }
