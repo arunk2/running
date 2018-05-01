@@ -13,54 +13,32 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.getlogin();
   }
 
   getlogin() {
-    fetch("http://csika.org:8082/login")
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            isLoaded: true,
-            items: result.items
-          });
-        },
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-      );
+    fetch('http://csika.org:8082/login').then(function(response) {
+      return response.json();
+    }).then(function(result) {
+      console.log(result);
+    });
   }
 
   getUserData = () => {
     console.log('this.state.items', this.state.items);
-    fetch(this.state.items.url)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            isLoaded: true,
-            items: result.items
-          });
-        },
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-      );
+    fetch(this.state.items.url).then(function(response) {
+      return response.json();
+    }).then(function(result) {
+      console.log(result);
+    });
   }
 
   render() {
     return (
       <Fragment>
         <div className={styles.logo}>
-        TAMBARAM ThunderBOLTS {this.state.userData.length}
+        TAMBARAM ThunderBOLTS
         </div>
         <div className={styles.homeContainer}>
           <div className={styles.bannerImage}>&nbsp;</div>
