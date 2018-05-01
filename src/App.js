@@ -2,35 +2,62 @@
 
 import React, { Component, Fragment } from 'react';
 import styles from './styles/app.css';
-import Isvg from 'react-inlinesvg';
+import { athletesService } from './dataservice';
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoaded: false,
       items: {},
-      userData: []
+      userData: {
+        athletes: [
+          {
+            access_token: "cfc6e196c13ab4e3bd97e64151267cbec58acb4d",
+            email: "kamalcdsk@gmail.com",
+            firstname: "Kamal",
+            id: 29315452,
+            lastname: "K",
+            profile: "https://lh3.googleusercontent.com/-Iccq9_n2RKk/AAAAAAAAAAI/AAAAAAAAEKk/7vYg_0XXFiw/photo.jpg",
+            sex: "M",
+            username: "None"
+          },
+          {
+            access_token: "aa70f5f3249fb5279b36266df780904ffefd708e",
+            email: "emailarunkumar@gmail.com",
+            firstname: "Arunkumar",
+            id: 23133379,
+            lastname: "Krishnan",
+            profile: "https://lh6.googleusercontent.com/-BkIIQNOenVE/AAAAAAAAAAI/AAAAAAAABIo/hPpblnjTygM/photo.jpg",
+            sex: "M",
+            username: "arunkumar_krishnan"
+          }
+        ],
+        status: "success"
+      }
     };
   }
 
   componentWillMount() {
-    this.getlogin();
+    this.getLogin();
   }
 
-  getlogin() {
-    fetch('http://csika.org:8082/login').then(function(response) {
-      return response.json();
-    }).then(function(result) {
-      console.log(result);
+
+  getLogin = () => {
+    athletesService.getLogin().then((result) => {
+      const totalRecord = result;
+      this.setState({ totalRecord });
+    }, (err) => {
+      console.log("all list count error ", err);
     });
   }
 
   getUserData = () => {
     console.log('this.state.items', this.state.items);
-    fetch(this.state.items.url).then(function(response) {
-      return response.json();
-    }).then(function(result) {
-      console.log(result);
+    athletesService.getLogin().then((result) => {
+      const totalRecord = result;
+      this.setState({ totalRecord });
+    }, (err) => {
+      console.log("all list count error ", err);
     });
   }
 
@@ -61,7 +88,6 @@ class App extends Component {
                   <th>Thing 5</th>
                   <th>Thing 6</th>
                   <th>The final thing!</th>
-                  <th className={styles.empty} />
                 </tr>
                 <tr>
                   <td>1</td>
@@ -71,9 +97,6 @@ class App extends Component {
                   <td>nay?</td>
                   <td>smashing!</td>
                   <td>yeah!</td>
-                  <td className={styles.editButtons}><Isvg src={require('./styles/edit.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /><Isvg src={require('./styles/delete.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /></td>
                 </tr>
                 <tr>
                   <td>1</td>
@@ -83,9 +106,6 @@ class App extends Component {
                   <td>nay?</td>
                   <td>smashing!</td>
                   <td>yeah!</td>
-                  <td className={styles.editButtons}><Isvg src={require('./styles/edit.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /><Isvg src={require('./styles/delete.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /></td>
                 </tr>
                 <tr>
                   <td>1</td>
@@ -95,9 +115,6 @@ class App extends Component {
                   <td>nay?</td>
                   <td>smashing!</td>
                   <td>yeah!</td>
-                  <td className={styles.editButtons}><Isvg src={require('./styles/edit.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /><Isvg src={require('./styles/delete.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /></td>
                 </tr>
                 <tr>
                   <td>1</td>
@@ -107,9 +124,6 @@ class App extends Component {
                   <td>nay?</td>
                   <td>smashing!</td>
                   <td>yeah!</td>
-                  <td className={styles.editButtons}><Isvg src={require('./styles/edit.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /><Isvg src={require('./styles/delete.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /></td>
                 </tr>
                 <tr>
                   <td>1</td>
@@ -119,9 +133,6 @@ class App extends Component {
                   <td>nay?</td>
                   <td>smashing!</td>
                   <td>yeah!</td>
-                  <td className={styles.editButtons}><Isvg src={require('./styles/edit.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /><Isvg src={require('./styles/delete.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /></td>
                 </tr>
                 <tr>
                   <td>1</td>
@@ -131,9 +142,6 @@ class App extends Component {
                   <td>nay?</td>
                   <td>smashing!</td>
                   <td>yeah!</td>
-                  <td className={styles.editButtons}><Isvg src={require('./styles/edit.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /><Isvg src={require('./styles/delete.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /></td>
                 </tr>
                 <tr>
                   <td>1</td>
@@ -143,9 +151,6 @@ class App extends Component {
                   <td>nay?</td>
                   <td>smashing!</td>
                   <td>yeah!</td>
-                  <td className={styles.editButtons}><Isvg src={require('./styles/edit.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /><Isvg src={require('./styles/delete.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /></td>
                 </tr>
                 <tr>
                   <td>1</td>
@@ -155,9 +160,6 @@ class App extends Component {
                   <td>nay?</td>
                   <td>smashing!</td>
                   <td>yeah!</td>
-                  <td className={styles.editButtons}><Isvg src={require('./styles/edit.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /><Isvg src={require('./styles/delete.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /></td>
                 </tr>
               </table>
             </div>
@@ -174,7 +176,6 @@ class App extends Component {
                   <th>Thing 5</th>
                   <th>Thing 6</th>
                   <th>The final thing!</th>
-                  <th className={styles.empty} />
                 </tr>
                 <tr>
                   <td>1</td>
@@ -184,9 +185,6 @@ class App extends Component {
                   <td>nay?</td>
                   <td>smashing!</td>
                   <td>yeah!</td>
-                  <td className={styles.editButtons}><Isvg src={require('./styles/edit.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /><Isvg src={require('./styles/delete.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /></td>
                 </tr>
                 <tr>
                   <td>1</td>
@@ -196,9 +194,6 @@ class App extends Component {
                   <td>nay?</td>
                   <td>smashing!</td>
                   <td>yeah!</td>
-                  <td className={styles.editButtons}><Isvg src={require('./styles/edit.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /><Isvg src={require('./styles/delete.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /></td>
                 </tr>
                 <tr>
                   <td>1</td>
@@ -208,9 +203,6 @@ class App extends Component {
                   <td>nay?</td>
                   <td>smashing!</td>
                   <td>yeah!</td>
-                  <td className={styles.editButtons}><Isvg src={require('./styles/edit.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /><Isvg src={require('./styles/delete.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /></td>
                 </tr>
                 <tr>
                   <td>1</td>
@@ -220,9 +212,6 @@ class App extends Component {
                   <td>nay?</td>
                   <td>smashing!</td>
                   <td>yeah!</td>
-                  <td className={styles.editButtons}><Isvg src={require('./styles/edit.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /><Isvg src={require('./styles/delete.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /></td>
                 </tr>
                 <tr>
                   <td>1</td>
@@ -232,9 +221,6 @@ class App extends Component {
                   <td>nay?</td>
                   <td>smashing!</td>
                   <td>yeah!</td>
-                  <td className={styles.editButtons}><Isvg src={require('./styles/edit.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /><Isvg src={require('./styles/delete.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /></td>
                 </tr>
                 <tr>
                   <td>1</td>
@@ -244,9 +230,6 @@ class App extends Component {
                   <td>nay?</td>
                   <td>smashing!</td>
                   <td>yeah!</td>
-                  <td className={styles.editButtons}><Isvg src={require('./styles/edit.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /><Isvg src={require('./styles/delete.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /></td>
                 </tr>
                 <tr>
                   <td>1</td>
@@ -256,9 +239,6 @@ class App extends Component {
                   <td>nay?</td>
                   <td>smashing!</td>
                   <td>yeah!</td>
-                  <td className={styles.editButtons}><Isvg src={require('./styles/edit.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /><Isvg src={require('./styles/delete.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /></td>
                 </tr>
                 <tr>
                   <td>1</td>
@@ -268,9 +248,6 @@ class App extends Component {
                   <td>nay?</td>
                   <td>smashing!</td>
                   <td>yeah!</td>
-                  <td className={styles.editButtons}><Isvg src={require('./styles/edit.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /><Isvg src={require('./styles/delete.svg')}
-                    className={styles.svgContainer} cacheGetRequets={true} /></td>
                 </tr>
               </table>
             </div>
