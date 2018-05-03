@@ -11,22 +11,22 @@ class App extends Component {
       isLoaded: false,
       items: {},
       userData: {
-        columns: [{ id: 'Id', profile: 'Profile Pic', firstname: 'First Name', lastname: 'Last Name' }],
-        athletes: [],
-        status: "success"
-      }
+        columns: [{ id: 'Id', profile: 'Profile Pic', firstname: 'First Name', lastname: 'Last Name' }]
+      },
+      athletes: []
     };
   }
 
   componentWillMount() {
     this.getLogin();
+    this.getAthletes();
   }
 
 
   getLogin = () => {
     athletesService.getLogin().then((result) => {
-      const totalRecord = result;
-      this.setState({ totalRecord });
+      const items = result;
+      this.setState({ items });
     }, (err) => {
       console.log("all list count error ", err);
     });
@@ -34,7 +34,7 @@ class App extends Component {
 
   getUserData = () => {
     console.log('this.state.items', this.state.items);
-    athletesService.getLogin().then((result) => {
+    athletesService.getLoginAcess(this.state.items.url).then((result) => {
       const totalRecord = result;
       this.setState({ totalRecord });
     }, (err) => {
@@ -42,6 +42,14 @@ class App extends Component {
     });
   }
 
+  getAthletes= () => {
+    athletesService.getAthletes().then((result) => {
+      let athletes = result.athletes;
+      this.setState({ athletes });
+    }, (err) => {
+      console.log("all list count error ", err);
+    });
+  }
 
   render() {
     console.log('this.state.userData', this.state.userData);
@@ -52,12 +60,12 @@ class App extends Component {
         </div>
         <div className={styles.homeContainer}>
           <div className={styles.bannerImage}>&nbsp;</div>
-          {this.state.userData.athletes.length === 0 && <div className={styles.addButton}>
+          <div className={styles.addButton}>
             <span>&nbsp;</span>
-            <button onClick={this.getUserData}>Log In</button>
+            <button onClick={this.getUserData}>Link Strava</button>
             <span>&nbsp;</span>
-          </div>}
-          {this.state.userData.athletes.length !== 0 && <div className={styles.mainContent}>
+          </div>
+          {this.state.athletes.length !== 0 && <div className={styles.mainContent}>
             <div className={styles.header}>
               <h4>Kamal K Activity 1</h4>
             </div>
@@ -74,7 +82,7 @@ class App extends Component {
                     </Fragment>
                   ))}
                 </tr>
-                {this.state.userData.athletes.map((data) => (<tr key={data.id}>
+                {this.state.athletes.map((data) => (<tr key={data.id}>
                   <Fragment >
                     <td>{data.id}</td>
                     <td><img src={data.profile} alt="Smiley face" height="42" width="42"/></td>
@@ -105,7 +113,7 @@ class App extends Component {
                     </Fragment>
                   ))}
                 </tr>
-                {this.state.userData.athletes.map((data) => (<tr key={data.id}>
+                {this.state.athletes.map((data) => (<tr key={data.id}>
                   <Fragment >
                     <td>{data.id}</td>
                     <td><img src={data.profile} alt="Smiley face" height="42" width="42"/></td>

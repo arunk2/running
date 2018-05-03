@@ -26,10 +26,12 @@
   align-self: center;
   justify-self: center;
   outline: none;
+  font-size: 14px;
 }
 .addButton {
   display: grid;
   grid-template-columns: auto 300px auto;
+  margin-bottom: 20px;
 }
 .header{
   background: rgb(var(--white));

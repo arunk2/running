@@ -4,7 +4,10 @@ export const athletesService = {
   getLogin() {
     return DataService.get('http://csika.org:8082/login');
   },
-  getAthletes(url) {
+  getLoginAcess(url) {
     return DataService.get(url);
+  },
+  getAthletes() {
+    return DataService.get('http://csika.org:8082/athletes');
   }
 };
