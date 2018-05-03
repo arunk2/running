@@ -3,6 +3,7 @@
 import React, { Component, Fragment } from 'react';
 import styles from './styles/app.css';
 import { athletesService } from './dataservice';
+import Isvg from 'react-inlinesvg';
 class App extends Component {
   constructor(props) {
     super(props);
@@ -10,28 +11,8 @@ class App extends Component {
       isLoaded: false,
       items: {},
       userData: {
-        athletes: [
-          {
-            access_token: "cfc6e196c13ab4e3bd97e64151267cbec58acb4d",
-            email: "kamalcdsk@gmail.com",
-            firstname: "Kamal",
-            id: 29315452,
-            lastname: "K",
-            profile: "https://lh3.googleusercontent.com/-Iccq9_n2RKk/AAAAAAAAAAI/AAAAAAAAEKk/7vYg_0XXFiw/photo.jpg",
-            sex: "M",
-            username: "None"
-          },
-          {
-            access_token: "aa70f5f3249fb5279b36266df780904ffefd708e",
-            email: "emailarunkumar@gmail.com",
-            firstname: "Arunkumar",
-            id: 23133379,
-            lastname: "Krishnan",
-            profile: "https://lh6.googleusercontent.com/-BkIIQNOenVE/AAAAAAAAAAI/AAAAAAAABIo/hPpblnjTygM/photo.jpg",
-            sex: "M",
-            username: "arunkumar_krishnan"
-          }
-        ],
+        columns: [{ id: 'Id', profile: 'Profile Pic', firstname: 'First Name', lastname: 'Last Name' }],
+        athletes: [],
         status: "success"
       }
     };
@@ -61,7 +42,9 @@ class App extends Component {
     });
   }
 
+
   render() {
+    console.log('this.state.userData', this.state.userData);
     return (
       <Fragment>
         <div className={styles.logo}>
@@ -69,98 +52,41 @@ class App extends Component {
         </div>
         <div className={styles.homeContainer}>
           <div className={styles.bannerImage}>&nbsp;</div>
-          {this.state.userData.length === 0 && <div className={styles.addButton}>
+          {this.state.userData.athletes.length === 0 && <div className={styles.addButton}>
             <span>&nbsp;</span>
             <button onClick={this.getUserData}>Log In</button>
             <span>&nbsp;</span>
           </div>}
-          {this.state.userData.length !== 0 && <div className={styles.mainContent}>
+          {this.state.userData.athletes.length !== 0 && <div className={styles.mainContent}>
             <div className={styles.header}>
               <h4>Kamal K Activity 1</h4>
             </div>
             <div className={styles.userdetails}>
               <table className={styles.table}>
                 <tr>
-                  <th>Thing Number</th>
-                  <th>Thing 2</th>
-                  <th>Thing 3</th>
-                  <th>Thing 4</th>
-                  <th>Thing 5</th>
-                  <th>Thing 6</th>
-                  <th>The final thing!</th>
+                  {this.state.userData.columns.map((data) => (
+                    <Fragment key={data.id}>
+                      <th>{data.id}</th>
+                      <th>{data.profile}</th>
+                      <th>{data.firstname}</th>
+                      <th>{data.lastname}</th>
+                      <th>&nbsp;</th>
+                    </Fragment>
+                  ))}
                 </tr>
-                <tr>
-                  <td>1</td>
-                  <td>some data</td>
-                  <td>other data</td>
-                  <td>ye?</td>
-                  <td>nay?</td>
-                  <td>smashing!</td>
-                  <td>yeah!</td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>some data</td>
-                  <td>other data</td>
-                  <td>ye?</td>
-                  <td>nay?</td>
-                  <td>smashing!</td>
-                  <td>yeah!</td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>some data</td>
-                  <td>other data</td>
-                  <td>ye?</td>
-                  <td>nay?</td>
-                  <td>smashing!</td>
-                  <td>yeah!</td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>some data</td>
-                  <td>other data</td>
-                  <td>ye?</td>
-                  <td>nay?</td>
-                  <td>smashing!</td>
-                  <td>yeah!</td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>some data</td>
-                  <td>other data</td>
-                  <td>ye?</td>
-                  <td>nay?</td>
-                  <td>smashing!</td>
-                  <td>yeah!</td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>some data</td>
-                  <td>other data</td>
-                  <td>ye?</td>
-                  <td>nay?</td>
-                  <td>smashing!</td>
-                  <td>yeah!</td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>some data</td>
-                  <td>other data</td>
-                  <td>ye?</td>
-                  <td>nay?</td>
-                  <td>smashing!</td>
-                  <td>yeah!</td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>some data</td>
-                  <td>other data</td>
-                  <td>ye?</td>
-                  <td>nay?</td>
-                  <td>smashing!</td>
-                  <td>yeah!</td>
-                </tr>
+                {this.state.userData.athletes.map((data) => (<tr key={data.id}>
+                  <Fragment >
+                    <td>{data.id}</td>
+                    <td><img src={data.profile} alt="Smiley face" height="42" width="42"/></td>
+                    <td>{data.firstname}</td>
+                    <td>{data.lastname}</td>
+                    <td className={styles.editButtons}>
+                      {/* <Isvg src={require('./styles/edit.svg')}
+                        className={styles.svgContainer} cacheGetRequets={true} /> */}
+                      <Isvg src={require('./styles/delete.svg')}
+                        className={styles.svgContainer} cacheGetRequets={true} /></td>
+                  </Fragment>
+                </tr>))}
               </table>
             </div>
             <div className={styles.header}>
@@ -169,86 +95,29 @@ class App extends Component {
             <div className={styles.userdetails}>
               <table className={styles.table}>
                 <tr>
-                  <th>Thing Number</th>
-                  <th>Thing 2</th>
-                  <th>Thing 3</th>
-                  <th>Thing 4</th>
-                  <th>Thing 5</th>
-                  <th>Thing 6</th>
-                  <th>The final thing!</th>
+                  {this.state.userData.columns.map((data) => (
+                    <Fragment key={data.id}>
+                      <th>{data.id}</th>
+                      <th>{data.profile}</th>
+                      <th>{data.firstname}</th>
+                      <th>{data.lastname}</th>
+                      <th>&nbsp;</th>
+                    </Fragment>
+                  ))}
                 </tr>
-                <tr>
-                  <td>1</td>
-                  <td>some data</td>
-                  <td>other data</td>
-                  <td>ye?</td>
-                  <td>nay?</td>
-                  <td>smashing!</td>
-                  <td>yeah!</td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>some data</td>
-                  <td>other data</td>
-                  <td>ye?</td>
-                  <td>nay?</td>
-                  <td>smashing!</td>
-                  <td>yeah!</td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>some data</td>
-                  <td>other data</td>
-                  <td>ye?</td>
-                  <td>nay?</td>
-                  <td>smashing!</td>
-                  <td>yeah!</td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>some data</td>
-                  <td>other data</td>
-                  <td>ye?</td>
-                  <td>nay?</td>
-                  <td>smashing!</td>
-                  <td>yeah!</td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>some data</td>
-                  <td>other data</td>
-                  <td>ye?</td>
-                  <td>nay?</td>
-                  <td>smashing!</td>
-                  <td>yeah!</td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>some data</td>
-                  <td>other data</td>
-                  <td>ye?</td>
-                  <td>nay?</td>
-                  <td>smashing!</td>
-                  <td>yeah!</td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>some data</td>
-                  <td>other data</td>
-                  <td>ye?</td>
-                  <td>nay?</td>
-                  <td>smashing!</td>
-                  <td>yeah!</td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>some data</td>
-                  <td>other data</td>
-                  <td>ye?</td>
-                  <td>nay?</td>
-                  <td>smashing!</td>
-                  <td>yeah!</td>
-                </tr>
+                {this.state.userData.athletes.map((data) => (<tr key={data.id}>
+                  <Fragment >
+                    <td>{data.id}</td>
+                    <td><img src={data.profile} alt="Smiley face" height="42" width="42"/></td>
+                    <td>{data.firstname}</td>
+                    <td>{data.lastname}</td>
+                    <td className={styles.editButtons}>
+                      {/* <Isvg src={require('./styles/edit.svg')}
+                        className={styles.svgContainer} cacheGetRequets={true} /> */}
+                      <Isvg src={require('./styles/delete.svg')}
+                        className={styles.svgContainer} cacheGetRequets={true} /></td>
+                  </Fragment>
+                </tr>))}
               </table>
             </div>
           </div>}
