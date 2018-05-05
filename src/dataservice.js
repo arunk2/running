@@ -9,5 +9,8 @@ export const athletesService = {
   },
   getAthletes() {
     return DataService.get('http://csika.org:8082/athletes');
+  },
+  getActivites() {
+    return DataService.get('http://csika.org:8082/activities');
   }
 };

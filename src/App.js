@@ -13,14 +13,20 @@ class App extends Component {
       userData: {
         columns: [{ id: 'Id', profile: 'Profile Pic', firstname: 'First Name', lastname: 'Last Name' }]
       },
+      activityData: {
+        columns: [{ start_date: 'Date', athlete_id: 'Id', athlete_firstname: 'First Name', athlete_lastname: 'Last Name', title: 'Title', type: 'Type', distance: 'Distance', elapsed_time: 'Time' }]
+      },
       allAthletes: [],
-      athletes: []
+      athletes: [],
+      activites: [],
+      allActivites: []
     };
   }
 
   componentWillMount() {
     this.getLogin();
     this.getAthletes();
+    this.getActivites();
   }
 
   getLogin = () => {
@@ -49,6 +55,14 @@ class App extends Component {
       console.log("all list count error ", err);
     });
   }
+  getActivites= () => {
+    athletesService.getActivites().then((result) => {
+      let allActivites = result.activities;
+      this.setState({ allActivites, activites: allActivites });
+    }, (err) => {
+      console.log("all list count error ", err);
+    });
+  }
   searchColumns = (e) => {
     var updatedList = this.state.allAthletes;
     updatedList = updatedList.filter(function(item) {
@@ -57,6 +71,16 @@ class App extends Component {
     });
     this.setState({ athletes: updatedList });
   }
+
+  searchActivites = (e) => {
+    var updatedList = this.state.allActivites;
+    updatedList = updatedList.filter(function(item) {
+      return item.title.toLowerCase().search(
+        e.target.value.toLowerCase()) !== -1;
+    });
+    this.setState({ activites: updatedList });
+  }
+
 
   render() {
     return (
@@ -73,8 +97,8 @@ class App extends Component {
           </div>
           {this.state.athletes.length !== 0 && <div className={styles.mainContent}>
             <div className={styles.header}>
-              <h4>Kamal K Activity 1</h4>
-              <div>&nbsp;<input type="text" placeholder="search" onChange={this.searchColumns}/></div>
+              <h4>Athletes</h4>
+              <div>&nbsp;<input type="text" placeholder="Name" onChange={this.searchColumns}/></div>
             </div>
             <div className={styles.userdetails}>
               <table className={styles.table}>
@@ -105,32 +129,36 @@ class App extends Component {
               </table>
             </div>
             <div className={styles.header}>
-              <h4>Kamal K Activity 2</h4>
+              <h4>Activitys</h4>
+              <div>&nbsp;<input type="text" placeholder="Name" onChange={this.searchActivites}/></div>
             </div>
             <div className={styles.userdetails}>
               <table className={styles.table}>
                 <tr>
-                  {this.state.userData.columns.map((data) => (
-                    <Fragment key={data.id}>
-                      <th>{data.id}</th>
-                      <th>{data.profile}</th>
-                      <th>{data.firstname}</th>
-                      <th>{data.lastname}</th>
+                  {this.state.activityData.columns.map((data) => (
+                    <Fragment key={data.athlete_id}>
+                      <th>{data.start_date}</th>
+                      <th>{data.athlete_id}</th>
+                      <th>{data.athlete_firstname}</th>
+                      <th>{data.athlete_lastname}</th>
+                      <th>{data.title}</th>
+                      <th>{data.type}</th>
+                      <th>{data.distance}</th>
+                      <th>{data.elapsed_time}</th>
                       <th>&nbsp;</th>
                     </Fragment>
                   ))}
                 </tr>
-                {this.state.athletes.map((data) => (<tr key={data.id}>
+                {this.state.activites.map((data) => (<tr key={data.id}>
                   <Fragment >
-                    <td>{data.id}</td>
-                    <td><img src={data.profile} alt="Smiley face" height="42" width="42"/></td>
-                    <td>{data.firstname}</td>
-                    <td>{data.lastname}</td>
-                    <td className={styles.editButtons}>
-                      {/* <Isvg src={require('./styles/edit.svg')}
-                        className={styles.svgContainer} cacheGetRequets={true} /> */}
-                      <Isvg src={require('./styles/delete.svg')}
-                        className={styles.svgContainer} cacheGetRequets={true} /></td>
+                    <td>{data.start_date}</td>
+                    <td>{data.athlete_id}</td>
+                    <td>{data.athlete_firstname}</td>
+                    <td>{data.athlete_lastname}</td>
+                    <td>{data.title}</td>
+                    <td>{data.type}</td>
+                    <td>{data.distance}</td>
+                    <td>{data.elapsed_time}</td>
                   </Fragment>
                 </tr>))}
               </table>
