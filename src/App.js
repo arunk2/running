@@ -13,6 +13,7 @@ class App extends Component {
       userData: {
         columns: [{ id: 'Id', profile: 'Profile Pic', firstname: 'First Name', lastname: 'Last Name' }]
       },
+      allAthletes: [],
       athletes: []
     };
   }
@@ -21,7 +22,6 @@ class App extends Component {
     this.getLogin();
     this.getAthletes();
   }
-
 
   getLogin = () => {
     athletesService.getLogin().then((result) => {
@@ -33,7 +33,6 @@ class App extends Component {
   }
 
   getUserData = () => {
-    console.log('this.state.items', this.state.items);
     athletesService.getLoginAcess(this.state.items.url).then((result) => {
       const totalRecord = result;
       this.setState({ totalRecord });
@@ -44,15 +43,22 @@ class App extends Component {
 
   getAthletes= () => {
     athletesService.getAthletes().then((result) => {
-      let athletes = result.athletes;
-      this.setState({ athletes });
+      let allAthletes = result.athletes;
+      this.setState({ allAthletes, athletes: allAthletes });
     }, (err) => {
       console.log("all list count error ", err);
     });
   }
+  searchColumns = (e) => {
+    var updatedList = this.state.allAthletes;
+    updatedList = updatedList.filter(function(item) {
+      return item.firstname.toLowerCase().search(
+        e.target.value.toLowerCase()) !== -1;
+    });
+    this.setState({ athletes: updatedList });
+  }
 
   render() {
-    console.log('this.state.userData', this.state.userData);
     return (
       <Fragment>
         <div className={styles.logo}>
@@ -68,6 +74,7 @@ class App extends Component {
           {this.state.athletes.length !== 0 && <div className={styles.mainContent}>
             <div className={styles.header}>
               <h4>Kamal K Activity 1</h4>
+              <div>&nbsp;<input type="text" placeholder="search" onChange={this.searchColumns}/></div>
             </div>
             <div className={styles.userdetails}>
               <table className={styles.table}>

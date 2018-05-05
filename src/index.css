@@ -82,10 +82,11 @@ h6 {
 
 input, select, .input {
   font-family: 'Source Sans Pro';
-  font-size: 1.5rem;
+  font-size: 15px;
   letter-spacing: 0.3px;
   border-radius: 3px;
-  padding: 0 1rem;
+  margin-left: 20px;
+  padding: 5px;
   border: 1px solid rgba(var(--dusk), 0.6);
 }
 
@@ -97,7 +98,7 @@ label {
 }
 
 ::placeholder {
-  font-size: 1.3rem;
+  font-size: 15px;
   letter-spacing: 0.3px;
   color:  rgb(var(--bluey-grey));
 }
