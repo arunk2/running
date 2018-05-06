@@ -14,7 +14,7 @@ class App extends Component {
         columns: [{ id: 'Id', profile: 'Profile Pic', firstname: 'First Name', lastname: 'Last Name' }]
       },
       activityData: {
-        columns: [{ start_date: 'Date', athlete_id: 'Id', athlete_firstname: 'First Name', athlete_lastname: 'Last Name', title: 'Title', type: 'Type', distance: 'Distance', elapsed_time: 'Time' }]
+        columns: [{ start_date: 'Date', athlete_id: 'Athlete Id', athlete_firstname: 'Name', title: 'Title', type: 'Type', distance: 'Distance', elapsed_time: 'Time' }]
       },
       allAthletes: [],
       athletes: [],
@@ -75,7 +75,7 @@ class App extends Component {
   searchActivites = (e) => {
     var updatedList = this.state.allActivites;
     updatedList = updatedList.filter(function(item) {
-      return item.title.toLowerCase().search(
+      return item.athlete_firstname.toLowerCase().search(
         e.target.value.toLowerCase()) !== -1;
     });
     this.setState({ activites: updatedList });
@@ -86,13 +86,13 @@ class App extends Component {
     return (
       <Fragment>
         <div className={styles.logo}>
-        TAMBARAM ThunderBOLTS
+        Tambaram Thunderbolts
         </div>
         <div className={styles.homeContainer}>
           <div className={styles.bannerImage}>&nbsp;</div>
           <div className={styles.addButton}>
             <span>&nbsp;</span>
-            <button onClick={this.getUserData}>Link Strava</button>
+            <a href="https://www.strava.com/oauth/authorize?response_type=code&client_id=25184&approval_prompt=auto&redirect_uri=http%3A%2F%2Fcsika.org%3A8082%2Fauthorized">Link strava data</a>
             <span>&nbsp;</span>
           </div>
           {this.state.athletes.length !== 0 && <div className={styles.mainContent}>
@@ -129,7 +129,7 @@ class App extends Component {
               </table>
             </div>
             <div className={styles.header}>
-              <h4>Activitys</h4>
+              <h4>Activities</h4>
               <div>&nbsp;<input type="text" placeholder="Name" onChange={this.searchActivites}/></div>
             </div>
             <div className={styles.userdetails}>
@@ -140,7 +140,6 @@ class App extends Component {
                       <th>{data.start_date}</th>
                       <th>{data.athlete_id}</th>
                       <th>{data.athlete_firstname}</th>
-                      <th>{data.athlete_lastname}</th>
                       <th>{data.title}</th>
                       <th>{data.type}</th>
                       <th>{data.distance}</th>
@@ -154,7 +153,6 @@ class App extends Component {
                     <td>{data.start_date}</td>
                     <td>{data.athlete_id}</td>
                     <td>{data.athlete_firstname}</td>
-                    <td>{data.athlete_lastname}</td>
                     <td>{data.title}</td>
                     <td>{data.type}</td>
                     <td>{data.distance}</td>
