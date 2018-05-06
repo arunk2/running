@@ -19,7 +19,7 @@
 .logo img{
   height: 30px;
 }
-.addButton button{
+.addButton a{
   width: 200px;
   color: #FFF;
   background: #357600;
@@ -27,6 +27,10 @@
   justify-self: center;
   outline: none;
   font-size: 14px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  text-decoration: none;
 }
 .addButton {
   display: grid;
@@ -293,21 +297,37 @@
 }
 .mainContent .header {
   height: 50px;
+  background: #35761a;
 }
 
-table.table { width: 100%; }
+.header h4{
+  width: calc(100% - 280px);
+  text-align: center;
+  color: #FFF;
+  font-size: 25px;
+}
+
+table.table { width: 100%;     overflow: auto; }
 
 .table th, .table td { 
   text-align: left; 
   padding: 0.25em;
+  min-width: 200px;
 }
-
+.table th:last-child, .table td:last-child{
+  min-width: 100px;
+}
 .table tr { 
   border-bottom: 1px solid #DDD;
-  height: 40px;
+  height: 48px;
   line-height: 40px;
+  display: flex;
+  justify-self: center;
+  align-self: center;
 }
 td.editButtons { text-align: right; }
+tr:nth-child(even) {background: #F3F9F3}
+tr:nth-child(odd) {background: #FFF}
 button { 
   border-radius: 3px; 
   border: none; 
@@ -323,7 +343,7 @@ button:hover {
   margin-right: 10px;
   cursor: pointer;
 }
-
+/* 
 
 @media screen and (max-width: 800px) {
   tr { 
@@ -337,10 +357,11 @@ button:hover {
     flex: 1 1 150px;
     border: 0.5px solid rgba(3,3,3,0.2);
   }
-}
+} */
 
 .userdetails{
   padding: 10px 30px;
+  overflow: auto;
 }
 
 table th{
@@ -357,4 +378,11 @@ table tr:hover{
   height: 320px;
   background-position: center;
   margin-bottom: 40px;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .homeContainer{
+    padding: 100px 10px;
+  }
 }

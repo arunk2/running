@@ -92,13 +92,13 @@ class App extends Component {
           <div className={styles.bannerImage}>&nbsp;</div>
           <div className={styles.addButton}>
             <span>&nbsp;</span>
-            <a href="https://www.strava.com/oauth/authorize?response_type=code&client_id=25184&approval_prompt=auto&redirect_uri=http%3A%2F%2Fcsika.org%3A8082%2Fauthorized">Link strava data</a>
+            <a href={this.state.items.url} target="_blank">Link Strava</a>
             <span>&nbsp;</span>
           </div>
           {this.state.athletes.length !== 0 && <div className={styles.mainContent}>
             <div className={styles.header}>
+              <div><input type="text" placeholder="Search by Name" onChange={this.searchColumns}/></div>
               <h4>Athletes</h4>
-              <div>&nbsp;<input type="text" placeholder="Name" onChange={this.searchColumns}/></div>
             </div>
             <div className={styles.userdetails}>
               <table className={styles.table}>
@@ -109,28 +109,28 @@ class App extends Component {
                       <th>{data.profile}</th>
                       <th>{data.firstname}</th>
                       <th>{data.lastname}</th>
-                      <th>&nbsp;</th>
+                      {/* <th>&nbsp;</th> */}
                     </Fragment>
                   ))}
                 </tr>
                 {this.state.athletes.map((data) => (<tr key={data.id}>
                   <Fragment >
                     <td>{data.id}</td>
-                    <td><img src={data.profile} alt="Smiley face" height="42" width="42"/></td>
+                    <td><img src={data.profile} alt="Smiley face" height="40" width="40"/></td>
                     <td>{data.firstname}</td>
                     <td>{data.lastname}</td>
-                    <td className={styles.editButtons}>
-                      {/* <Isvg src={require('./styles/edit.svg')}
-                        className={styles.svgContainer} cacheGetRequets={true} /> */}
+                    {/* <td className={styles.editButtons}>
+                      <Isvg src={require('./styles/edit.svg')}
+                        className={styles.svgContainer} cacheGetRequets={true} />
                       <Isvg src={require('./styles/delete.svg')}
-                        className={styles.svgContainer} cacheGetRequets={true} /></td>
+                        className={styles.svgContainer} cacheGetRequets={true} /></td> */}
                   </Fragment>
                 </tr>))}
               </table>
             </div>
             <div className={styles.header}>
+              <div><input type="text" placeholder="Search by Name" onChange={this.searchActivites}/></div>
               <h4>Activities</h4>
-              <div>&nbsp;<input type="text" placeholder="Name" onChange={this.searchActivites}/></div>
             </div>
             <div className={styles.userdetails}>
               <table className={styles.table}>
@@ -144,7 +144,7 @@ class App extends Component {
                       <th>{data.type}</th>
                       <th>{data.distance}</th>
                       <th>{data.elapsed_time}</th>
-                      <th>&nbsp;</th>
+                      {/* <th>&nbsp;</th> */}
                     </Fragment>
                   ))}
                 </tr>
@@ -157,6 +157,7 @@ class App extends Component {
                     <td>{data.type}</td>
                     <td>{data.distance}</td>
                     <td>{data.elapsed_time}</td>
+                    {/* <td>&nbsp;</td> */}
                   </Fragment>
                 </tr>))}
               </table>
