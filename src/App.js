@@ -109,7 +109,7 @@ class App extends Component {
                       <th>{data.profile}</th>
                       <th>{data.firstname}</th>
                       <th>{data.lastname}</th>
-                      <th>&nbsp;</th>
+                      {/* <th>&nbsp;</th> */}
                     </Fragment>
                   ))}
                 </tr>
@@ -119,11 +119,11 @@ class App extends Component {
                     <td><img src={data.profile} alt="Smiley face" height="40" width="40"/></td>
                     <td>{data.firstname}</td>
                     <td>{data.lastname}</td>
-                    <td className={styles.editButtons}>
-                      {/* <Isvg src={require('./styles/edit.svg')}
-                        className={styles.svgContainer} cacheGetRequets={true} /> */}
+                    {/* <td className={styles.editButtons}>
+                      <Isvg src={require('./styles/edit.svg')}
+                        className={styles.svgContainer} cacheGetRequets={true} />
                       <Isvg src={require('./styles/delete.svg')}
-                        className={styles.svgContainer} cacheGetRequets={true} /></td>
+                        className={styles.svgContainer} cacheGetRequets={true} /></td> */}
                   </Fragment>
                 </tr>))}
               </table>
