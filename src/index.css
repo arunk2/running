@@ -85,7 +85,6 @@ input, select, .input {
   font-size: 15px;
   letter-spacing: 0.3px;
   border-radius: 3px;
-  margin-left: 20px;
   padding: 5px;
   border: 1px solid rgba(var(--dusk), 0.6);
 }

@@ -75,7 +75,7 @@ class App extends Component {
   searchActivites = (e) => {
     var updatedList = this.state.allActivites;
     updatedList = updatedList.filter(function(item) {
-      return item.title.toLowerCase().search(
+      return item.athlete_firstname.toLowerCase().search(
         e.target.value.toLowerCase()) !== -1;
     });
     this.setState({ activites: updatedList });
@@ -92,13 +92,13 @@ class App extends Component {
           <div className={styles.bannerImage}>&nbsp;</div>
           <div className={styles.addButton}>
             <span>&nbsp;</span>
-            <button onClick={this.getUserData}>Link Strava</button>
+            <a href={this.state.items.url} target="_blank">Link Strava</a>
             <span>&nbsp;</span>
           </div>
           {this.state.athletes.length !== 0 && <div className={styles.mainContent}>
             <div className={styles.header}>
+              <div><input type="text" placeholder="Search by Name" onChange={this.searchColumns}/></div>
               <h4>Athletes</h4>
-              <div>&nbsp;<input type="text" placeholder="Name" onChange={this.searchColumns}/></div>
             </div>
             <div className={styles.userdetails}>
               <table className={styles.table}>
@@ -116,7 +116,7 @@ class App extends Component {
                 {this.state.athletes.map((data) => (<tr key={data.id}>
                   <Fragment >
                     <td>{data.id}</td>
-                    <td><img src={data.profile} alt="Smiley face" height="42" width="42"/></td>
+                    <td><img src={data.profile} alt="Smiley face" height="40" width="40"/></td>
                     <td>{data.firstname}</td>
                     <td>{data.lastname}</td>
                     <td className={styles.editButtons}>
@@ -129,8 +129,8 @@ class App extends Component {
               </table>
             </div>
             <div className={styles.header}>
+              <div><input type="text" placeholder="Search by Name" onChange={this.searchActivites}/></div>
               <h4>Activitys</h4>
-              <div>&nbsp;<input type="text" placeholder="Name" onChange={this.searchActivites}/></div>
             </div>
             <div className={styles.userdetails}>
               <table className={styles.table}>
@@ -145,7 +145,7 @@ class App extends Component {
                       <th>{data.type}</th>
                       <th>{data.distance}</th>
                       <th>{data.elapsed_time}</th>
-                      <th>&nbsp;</th>
+                      {/* <th>&nbsp;</th> */}
                     </Fragment>
                   ))}
                 </tr>
@@ -159,6 +159,7 @@ class App extends Component {
                     <td>{data.type}</td>
                     <td>{data.distance}</td>
                     <td>{data.elapsed_time}</td>
+                    {/* <td>&nbsp;</td> */}
                   </Fragment>
                 </tr>))}
               </table>
